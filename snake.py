@@ -4,7 +4,7 @@ import random
 turtle.tracer(1,0)
 
 turtle.penup()
-
+score1 = turtle.clone()
 turtle.register_shape("trash.gif")
 food = turtle.clone()
 food.shape("trash.gif")
@@ -60,6 +60,8 @@ UP_EDGE = 250
 DOWN_EDGE = -250
 RIGHT_EDGE = 400
 LEFT_EDGE = -400
+x = 0
+score1.hideturtle()
 def up():
     global direction
     direction = UP
@@ -114,24 +116,40 @@ def move_snake():
         snake.goto(x_pos, y_pos + SQUARE_SIZE)
     elif direction == DOWN:
         snake.goto(x_pos, y_pos - SQUARE_SIZE)
-
-    my_pos = snake.pos()
-    pos_list.append(my_pos)
-    new_stamp = snake.stamp()
-    stamp_list.append(new_stamp)
-    old_stamp = stamp_list.pop(0)
-    snake.clearstamp(old_stamp)
-    pos_list.pop(0)
-    global food_stamps,food_pos
-    if snake.pos() in food_pos:
+    global food_stamps,food_pos,x
+    
+    if not snake.pos() in food_pos:
+        my_pos = snake.pos()
+        pos_list.append(my_pos)
+        new_stamp = snake.stamp()
+        stamp_list.append(new_stamp)
+        old_stamp = stamp_list.pop(0)
+        snake.clearstamp(old_stamp)
+        pos_list.pop(0)
+    elif snake.pos() in food_pos:
+        my_pos = snake.pos()
+        pos_list.append(my_pos)
+        new_stamp = snake.stamp()
+        stamp_list.append(new_stamp)        
         food_ind = food_pos.index(snake.pos())
         food.clearstamp(food_stamps[food_ind])
-
         food_pos.pop(food_ind)
         food_stamps.pop(food_ind)
         print('you have eaten the food')
         make_food()
-
+        x =  x + 1
+        score1.goto(0,0)
+        score1.clear()
+        score1.write('SCORE:' + str(x), False, "left", ("Arial", 16, "normal"))
+    else:
+        food.clearstamp(food_stamps[food_ind])
+        food_pos.pop(food_ind)
+        food_stamps.pop(food_ind)
+        print('you have eaten the food')
+        make_food()
+    
+    
+            
    
     new_pos = snake.pos()
     new_x_pos = new_pos[0]
@@ -154,12 +172,9 @@ def move_snake():
         quit()
 
     turtle.ontimer(move_snake,TIME_STEP)
-def grow():
-    if pos_list in food_pos:
-        START_LENGTH = START_LENGTH + 10
-        print('you grew!')
+
+        
 make_food()
-grow()
 move_snake()
 
 '''
