@@ -15,6 +15,7 @@ SIZE_Y = 500
 turtle.setup(SIZE_X, SIZE_Y)
 
 
+
 SQUARE_SIZE = 20
 START_LENGTH = 6
 pos_list = []
