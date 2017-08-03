@@ -148,10 +148,18 @@ def move_snake():
     elif new_y_pos <= DOWN_EDGE:
         print('you hit the down edge!game over!')
         quit()
-        
+
+    if new_pos in pos_list[0:-1]:
+        print('you eat yourself!game over')
+        quit()
 
     turtle.ontimer(move_snake,TIME_STEP)
+def grow():
+    if pos_list in food_pos:
+        START_LENGTH = START_LENGTH + 10
+        print('you grew!')
 make_food()
+grow()
 move_snake()
 
 '''
