@@ -1,40 +1,50 @@
 import turtle
 turtle.penup()
-bird = turtle.clone()
-turtle.addshape('bird.gif')
-bird.shape('bird.gif')
-turtle.hideturtle()
+#bird = turtle.clone()
+#turtle.addshape('bird.gif')
+#bird.shape('bird.gif')
+turtle.shape('circle')
+#turtle.hideturtle()
 turtle.Screen()
 screen = turtle.Screen()
 screen.bgcolor('light blue')
 
-bird.goto(0,-250)
-
+turtle.goto(0,-150)
 
 box_pos=[]
 bird_pos=[]
 
-turtle.setup(600,600)
+turtle.setup(400,400)
 
+my_pos = turtle.pos()
 
+x_pos = my_pos[0]
+y_pos = my_pos[1]
+UP_EDGE = 300
+DOWN_EDGE = 0
+RIGHT_EDGE = -200
+LEFT_EDGE = 0
 
+x_pos = RIGHT_EDGE
+y_pos = UP_EDGE
 
+if my_pos == RIGHT_EDGE:
+    quit()
+UP_ARROW = 'Up'
+LEFT_ARROW = 'Left'
+DOWN_ARROW = 'Down'
+RIGHT_ARROW = 'Right'
+TIME_STEP = 100
+SPACEBAR = 'space'
 
-def move_bird():
-    bird.pos()
-    x_pos = bird.pos()[0]
-    y_pos = bird.pos()[1]
-    my_pos = bird.pos()
-    my_pos(x_pos,y_pos)
-    bird_pos.append(my_pos)
+UP = 0
+LEFT = 1
+DOWN = 2
+RIGHT = 3
 
+direction = UP
 
-    UP= 0
-    DOWN = 2
-    LEFT = 1
-    RIGHT= 3
-    direction = UP
-
+    
 def up():
     global direction
     direction = UP
@@ -55,19 +65,35 @@ def right():
     direction = RIGHT
     print('you pressed the right key')
 
-
-
-UP_ARROW = 'UP'
-DOWN_ARROW = 'DOWN'
-LEFT_ARROW = 'LEFT'
-RIGHT_ARROW ='RIGHT'
-
 turtle.onkeypress(up, UP_ARROW)
-bird.onkeypress(down, DOWN_ARROW)
-bird.onkeypress(left, LEFT_ARROW)
-bird.onkeypress(right, RIGHT_ARROW)
-bird.listen()
+turtle.onkeypress(down, DOWN_ARROW)
+turtle.onkeypress(left, LEFT_ARROW)
+turtle.onkeypress(right, RIGHT_ARROW)
+turtle.listen()
+    
 
-bird_pos[-1].clearstamp()
-bird_pos[-1].pop()
 
+
+def move_bird():
+    my_pos = turtle.pos()
+    x_pos = my_pos[0]
+    y_pos = my_pos[1]
+    if direction == RIGHT:
+        turtle.goto(x_pos + 10,y_pos)
+    elif direction == LEFT:
+        turtle.goto(x_pos - 10,y_pos)
+    elif direction == UP:
+        turtle.goto(x_pos, y_pos + 10)
+    elif direction == DOWN:
+        turtle.goto(x_pos, y_pos -10)
+        
+    turtle.ontimer(move_bird,TIME_STEP)
+
+def box():
+    box = turtle.clone()
+    
+    #box.addshape('box.gif')
+    #box.shape('box.gif')
+    box.shape('square')
+    
+move_bird()
