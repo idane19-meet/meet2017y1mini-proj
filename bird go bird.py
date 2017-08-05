@@ -18,27 +18,29 @@ turtle.Screen()
 screen = turtle.Screen()
 screen.bgcolor('light blue')
 
-turtle.goto(0,-150)
+turtle.goto(0,-300)
 
 box_pos=[]
 bird_pos=[]
 
-turtle.setup(400,400)
+#turtle.setup(400,400)
 
 my_pos = turtle.pos()
 
 x_pos = my_pos[0]
 y_pos = my_pos[1]
-UP_EDGE = 300
-DOWN_EDGE = 0
-RIGHT_EDGE = -200
-LEFT_EDGE = 0
+UP_EDGE = -200
+DOWN_EDGE = -400
+RIGHT_EDGE = 100
+LEFT_EDGE = -100
 
-x_pos = RIGHT_EDGE
-y_pos = UP_EDGE
-
-if my_pos == RIGHT_EDGE:
-    quit()
+'''
+while True:
+    x_pos < RIGHT_EDGE
+    x_pos > LEFT_EDGE
+    y_pos < UP_EDGE
+    y_pos > DOWN_EDGE
+'''
 UP_ARROW = 'Up'
 LEFT_ARROW = 'Left'
 DOWN_ARROW = 'Down'
